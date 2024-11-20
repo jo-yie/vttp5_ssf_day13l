@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persons List</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+    <a class="btn btn-primary" th:href="@{/persons/create}">Create</a>
+    <br/><br/>
+
+    <h1>Persons List:</h1>
+    
+    <table class="table table-success table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Salary</th>
+                <th>Email</th>
+                <th>DOB</th>
+                <th>Telephone</th>
+                <th>Postal Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="person, state: ${persons}">
+                <div th:if="${state.size gt 0}">
+                    <!-- <td th:utext="${person.id}"></td> -->
+                    <td data-th-text="${person.id}"></td>
+                    <td data-th-text="${person.firstName}"></td>
+                    <td data-th-text="${person.lastName}"></td>
+                    <td data-th-text="${person.salary}"></td>
+                    <td data-th-text="${person.email}"></td>
+                    <td data-th-text="${person.dob}"></td>
+                    <td data-th-text="${person.telephone}"></td>
+                    <td data-th-text="${person.postalCode}"></td>
+                    <td><a class="btn btn-danger" th:href="@{/persons/delete/{person-id}(person-id=${person.id})}">Delete</a></td>
+                    <td><a class="btn btn-success" th:href="@{/persons/update/{person-id}(person-id=${person.id})}">Edit</a></td>
+                </div>
+                <div th:if="${state.size le 0}">
+                    No record found
+                </div> 
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+</body>
+</html>
